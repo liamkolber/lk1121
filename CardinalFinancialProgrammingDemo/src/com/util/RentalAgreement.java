@@ -18,6 +18,8 @@ public class RentalAgreement
     private double discountAmount;
     private double finalCharge;
 
+    public RentalAgreement() {}
+
     public String getToolCode()
     {
         return toolCode;
