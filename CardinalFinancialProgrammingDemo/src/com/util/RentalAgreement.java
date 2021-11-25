@@ -1,0 +1,140 @@
+package com.util;
+
+import java.util.Date;
+
+public class RentalAgreement
+{
+    
+    private String toolCode;
+    private String toolType;
+    private String toolBrand;
+    private double dailyCharge;
+    private int rentalDays;
+    private Date checkoutDate;
+    private Date dueDate;
+    private int chargeDays;
+    private double preDiscountCharge;
+    private double discountPercent;
+    private double discountAmount;
+    private double finalCharge;
+
+    public String getToolCode()
+    {
+        return toolCode;
+    }
+
+    public void setToolCode(String toolCode)
+    {
+        this.toolCode = toolCode;
+    }
+
+    public String getToolType()
+    {
+        return toolType;
+    }
+
+    public void setToolType(String toolType)
+    {
+        this.toolType = toolType;
+    }
+
+    public String getToolBrand()
+    {
+        return toolBrand;
+    }
+
+    public void setToolBrand(String toolBrand)
+    {
+        this.toolBrand = toolBrand;
+    }
+
+    public double getDailyCharge()
+    {
+        return dailyCharge;
+    }
+
+    public void setDailyCharge(double dailyCharge)
+    {
+        this.dailyCharge = dailyCharge;
+    }
+
+    public int getRentalDays()
+    {
+        return rentalDays;
+    }
+
+    public void setRentalDays(int rentalDays)
+    {
+        this.rentalDays = rentalDays;
+    }
+
+    public Date getCheckoutDate()
+    {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate)
+    {
+        this.checkoutDate = checkoutDate;
+    }
+
+    public Date getDueDate()
+    {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate)
+    {
+        this.dueDate = dueDate;
+    }
+
+    public int getChargeDays() 
+    {
+        return chargeDays;
+    }
+
+    public void setChargeDays(int chargeDays)
+    {
+        this.chargeDays = chargeDays;
+    }
+
+    public double getPreDiscountCharge()
+    {
+        return preDiscountCharge;
+    }
+
+    public void setPreDiscountCharge(double preDiscountCharge)
+    {
+        this.preDiscountCharge = preDiscountCharge;
+    }
+
+    public double getDiscountPercent()
+    {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(double discountPercent)
+    {
+        this.discountPercent = discountPercent;
+    }
+
+    public double getDiscountAmount()
+    {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(double discountAmount)
+    {
+        this.discountAmount = discountAmount;
+    }
+
+    public double getFinalCharge()
+    {
+        return finalCharge;
+    }
+
+    public void setFinalCharge(double finalCharge)
+    {
+        this.finalCharge = finalCharge;
+    }
+}

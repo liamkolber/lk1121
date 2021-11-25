@@ -1,12 +1,13 @@
 package com.util;
 
-public class Tool {
-
+public class Tool
+{
     public String code;
     public String brand;
     public String type;
     public double charge;
 
+    // Would rather use a properties file to store this information
     private static final String codeCHNS = "CHNS";
     private static final String codeLADW = "LADW";
     private static final String codeJAKD = "JAKD";
@@ -29,6 +30,7 @@ public class Tool {
 
     public Tool(String code) throws Exception
     {
+        // Set tool information from tool code
         switch (code)
         {
             case codeCHNS:
@@ -57,35 +59,43 @@ public class Tool {
         
     }
 
-    public String getCode() {
+    public String getCode()
+    {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(String code)
+    {
         this.code = code;
     }
 
-    public String getBrand() {
+    public String getBrand()
+    {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(String brand)
+    {
         this.brand = brand;
     }
 
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(String type)
+    {
         this.type = type;
     }
 
-    public double getCharge() {
+    public double getCharge()
+    {
         return charge;
     }
 
-    public void setCharge(double charge) {
+    public void setCharge(double charge)
+    {
         this.charge = charge;
     }
 }
