@@ -6,6 +6,8 @@ public class Tool
     public String brand;
     public String type;
     public double charge;
+    public boolean weekendCharge;
+    public boolean holidayCharge;
 
     // Would rather use a properties file to store this information
     private static final String codeCHNS = "CHNS";
@@ -18,9 +20,9 @@ public class Tool
     private static final String brandJAKD = "DeWalt";
     private static final String brandJAKR = "Ridgid";
 
-    private static final String typeChainsaw = "Chainsaw";
-    private static final String typeLadder = "Ladder";
-    private static final String typeJackhammer = "Jackhammer";
+    public static final String typeChainsaw = "Chainsaw";
+    public static final String typeLadder = "Ladder";
+    public static final String typeJackhammer = "Jackhammer";
 
     private static final double chargeChainsaw = 1.49;
     private static final double chargeLadder = 1.99;
@@ -38,21 +40,29 @@ public class Tool
                 setBrand(brandCHNS);
                 setType(typeChainsaw);
                 setCharge(chargeChainsaw);
+                setWeekendCharge(false);
+                setHolidayCharge(true);
             case codeLADW:
                 setCode(code);
                 setBrand(brandLADW);
                 setType(typeLadder);
                 setCharge(chargeLadder);
+                setWeekendCharge(true);
+                setHolidayCharge(false);
             case codeJAKD:
                 setCode(code);
                 setBrand(brandJAKD);
                 setType(typeJackhammer);
                 setCharge(chargeJackhammer);
+                setWeekendCharge(false);
+                setHolidayCharge(false);
             case codeJAKR:
                 setCode(code);
                 setBrand(brandJAKR);
                 setType(typeJackhammer);
                 setCharge(chargeJackhammer);
+                setWeekendCharge(false);
+                setHolidayCharge(false);
             default:
                 throw new Exception(message);
         }
@@ -97,5 +107,25 @@ public class Tool
     public void setCharge(double charge)
     {
         this.charge = charge;
+    }
+
+    public boolean isWeekendCharge()
+    {
+        return weekendCharge;
+    }
+
+    public void setWeekendCharge(boolean weekendCharge)
+    {
+        this.weekendCharge = weekendCharge;
+    }
+
+    public boolean isHolidayCharge()
+    {
+        return holidayCharge;
+    }
+
+    public void setHolidayCharge(boolean holidayCharge)
+    {
+        this.holidayCharge = holidayCharge;
     }
 }
