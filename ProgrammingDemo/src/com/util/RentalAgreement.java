@@ -1,6 +1,6 @@
 package com.util;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class RentalAgreement
 {
@@ -10,8 +10,8 @@ public class RentalAgreement
     private String toolBrand;
     private double dailyCharge;
     private int rentalDays;
-    private Date checkoutDate;
-    private Date dueDate;
+    private LocalDate checkoutDate;
+    private LocalDate dueDate;
     private int chargeDays;
     private double preDiscountCharge;
     private double discountPercent;
@@ -70,22 +70,22 @@ public class RentalAgreement
         this.rentalDays = rentalDays;
     }
 
-    public Date getCheckoutDate()
+    public LocalDate getCheckoutDate()
     {
         return checkoutDate;
     }
 
-    public void setCheckoutDate(Date checkoutDate)
+    public void setCheckoutDate(LocalDate checkoutDate)
     {
         this.checkoutDate = checkoutDate;
     }
 
-    public Date getDueDate()
+    public LocalDate getDueDate()
     {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate)
+    public void setDueDate(LocalDate dueDate)
     {
         this.dueDate = dueDate;
     }
