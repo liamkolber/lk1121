@@ -68,6 +68,7 @@ public class CheckoutHandler {
         BigDecimal discountAmount = new BigDecimal((discountPercent/100.0) * preDiscountCharge).setScale(2, RoundingMode.HALF_UP);
         BigDecimal finalCharge = new BigDecimal(preDiscountCharge - discountAmount.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 
+        // Setting all values
         rentalAgreement.setToolCode(this.toolCode);
         rentalAgreement.setToolType(toolType);
         rentalAgreement.setToolBrand(toolBrand);

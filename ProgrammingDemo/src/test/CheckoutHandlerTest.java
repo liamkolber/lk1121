@@ -52,7 +52,7 @@ public class CheckoutHandlerTest {
             e.printStackTrace();
         }
 
-        assertTrue(rentalAgreement.getFinalCharge().toString().equals(expectedFinalCharge.toString()));
+        assertTrue(rentalAgreement.getFinalCharge().equals(expectedFinalCharge));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class CheckoutHandlerTest {
             e.printStackTrace();
         }
 
-        assertTrue(rentalAgreement.getFinalCharge().toString().equals(expectedFinalCharge.toString()));
+        assertTrue(rentalAgreement.getFinalCharge().equals(expectedFinalCharge));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class CheckoutHandlerTest {
             e.printStackTrace();
         }
 
-        assertTrue(rentalAgreement.getFinalCharge().toString().equals(expectedFinalCharge.toString()));
+        assertTrue(rentalAgreement.getFinalCharge().equals(expectedFinalCharge));
     }
 
     @Test
@@ -120,7 +120,7 @@ public class CheckoutHandlerTest {
             e.printStackTrace();
         }
 
-        assertTrue(rentalAgreement.getFinalCharge().toString().equals(expectedFinalCharge.toString()));
+        assertTrue(rentalAgreement.getFinalCharge().equals(expectedFinalCharge));
     }
 
     @Test
@@ -143,8 +143,6 @@ public class CheckoutHandlerTest {
             e.printStackTrace();
         }
 
-        assertTrue(rentalAgreement.getFinalCharge().toString().equals(expectedFinalCharge.toString()));
+        assertTrue(rentalAgreement.getFinalCharge().equals(expectedFinalCharge));
     }
-
-    
 }
