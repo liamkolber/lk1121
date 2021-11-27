@@ -32,7 +32,7 @@ public class Tool
 
     public Tool(String code) throws Exception
     {
-        // Set tool information from tool code
+        // Set tool information from given tool code
         switch (code)
         {
             case codeCHNS:
@@ -42,6 +42,7 @@ public class Tool
                 setCharge(chargeChainsaw);
                 setWeekendCharge(false);
                 setHolidayCharge(true);
+                break;
             case codeLADW:
                 setCode(code);
                 setBrand(brandLADW);
@@ -49,6 +50,7 @@ public class Tool
                 setCharge(chargeLadder);
                 setWeekendCharge(true);
                 setHolidayCharge(false);
+                break;
             case codeJAKD:
                 setCode(code);
                 setBrand(brandJAKD);
@@ -56,6 +58,7 @@ public class Tool
                 setCharge(chargeJackhammer);
                 setWeekendCharge(false);
                 setHolidayCharge(false);
+                break;
             case codeJAKR:
                 setCode(code);
                 setBrand(brandJAKR);
@@ -63,7 +66,9 @@ public class Tool
                 setCharge(chargeJackhammer);
                 setWeekendCharge(false);
                 setHolidayCharge(false);
+                break;
             default:
+                // Invalid code provided
                 throw new Exception(message);
         }
         

@@ -1,10 +1,10 @@
 package com.util;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class RentalAgreement
 {
-    
     private String toolCode;
     private String toolType;
     private String toolBrand;
@@ -16,7 +16,7 @@ public class RentalAgreement
     private double preDiscountCharge;
     private double discountPercent;
     private double discountAmount;
-    private double finalCharge;
+    private BigDecimal finalCharge;
 
     public RentalAgreement() {}
 
@@ -130,12 +130,12 @@ public class RentalAgreement
         this.discountAmount = discountAmount;
     }
 
-    public double getFinalCharge()
+    public BigDecimal getFinalCharge()
     {
         return finalCharge;
     }
 
-    public void setFinalCharge(double finalCharge)
+    public void setFinalCharge(BigDecimal finalCharge)
     {
         this.finalCharge = finalCharge;
     }

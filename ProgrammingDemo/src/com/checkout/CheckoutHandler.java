@@ -1,8 +1,13 @@
 package com.checkout;
 
+import static java.time.temporal.TemporalAdjusters.firstInMonth;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import static java.time.temporal.TemporalAdjusters.firstInMonth;
+import java.time.format.DateTimeFormatter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 
 import com.util.RentalAgreement;
 import com.util.Tool;
@@ -59,8 +64,8 @@ public class CheckoutHandler {
         LocalDate dueDate = checkoutDate.plusDays(dayCount);
         int totalChargeableDays = totalChargeableDays(tool);
         double preDiscountCharge = totalChargeableDays * toolCharge;
-        double discountAmount = discountPercent * preDiscountCharge;
-        double finalCharge = preDiscountCharge - discountAmount;
+        double discountAmount = (discountPercent/100.0) * preDiscountCharge;
+        BigDecimal finalCharge = new BigDecimal(preDiscountCharge - discountAmount).setScale(2, RoundingMode.HALF_UP);
 
         rentalAgreement.setToolCode(this.toolCode);
         rentalAgreement.setToolType(toolType);
@@ -74,6 +79,8 @@ public class CheckoutHandler {
         rentalAgreement.setDiscountPercent(this.discountPercent);
         rentalAgreement.setDiscountAmount(discountAmount);
         rentalAgreement.setFinalCharge(finalCharge);
+
+        outputAgreement(rentalAgreement);
         
         return rentalAgreement;
     }
@@ -128,7 +135,6 @@ public class CheckoutHandler {
      */
     private boolean isHoliday(LocalDate day)
     {
-        // Check if checkout period covers Independence Day
         if (day == holidayJul || day == holidaySep) return true;
 
         return false;
@@ -152,5 +158,26 @@ public class CheckoutHandler {
     private LocalDate getLaborDay(int year)
     {
         return LocalDate.of(year, 9, 1).with(firstInMonth(DayOfWeek.MONDAY));
+    }
+
+    /**
+     * Prints rental agreement with proper formatting for values that need it
+     * @param rentalAgreement
+     */
+    public void outputAgreement(RentalAgreement rentalAgreement){
+        System.out.println("|---------- Rental Agreement ----------|");
+        System.out.println("Tool Code: " + rentalAgreement.getToolCode());
+        System.out.println("Tool Type: " + rentalAgreement.getToolType());
+        System.out.println("Tool Brand: " + rentalAgreement.getToolBrand());
+        System.out.println("Rental Days: " + rentalAgreement.getRentalDays());
+        System.out.println("Checkout Date: " + rentalAgreement.getCheckoutDate().format(DateTimeFormatter.ofPattern("MM/dd/yy")));
+        System.out.println("Due Date: " + rentalAgreement.getDueDate().format(DateTimeFormatter.ofPattern("MM/dd/yy")));
+        System.out.println("Daily Rental Charge: " + NumberFormat.getCurrencyInstance().format(rentalAgreement.getDailyCharge()));
+        System.out.println("Charge Days: " + rentalAgreement.getChargeDays());
+        System.out.println("Pre-discount Charge: " + NumberFormat.getCurrencyInstance().format(rentalAgreement.getPreDiscountCharge()));
+        System.out.println("Discount: " + rentalAgreement.getDiscountPercent() + "%");
+        System.out.println("Discount Amount: " + NumberFormat.getCurrencyInstance().format(rentalAgreement.getDiscountAmount()));
+        System.out.println("Final Charge: " + NumberFormat.getCurrencyInstance().format(rentalAgreement.getFinalCharge()));
+        System.out.println("|--------------------------------------|");
     }
 }
