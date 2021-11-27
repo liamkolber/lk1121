@@ -22,7 +22,8 @@ public class CheckoutHandler {
     private String toolCode;
     private int dayCount;
     private double discountPercent;
-    LocalDate checkoutDate;
+    private LocalDate checkoutDate;
+    private LocalDate dueDate;
 
     public CheckoutHandler(String toolCode, int dayCount, double discountPercent, LocalDate checkoutDate)
     {
@@ -30,6 +31,7 @@ public class CheckoutHandler {
         this.dayCount = dayCount;
         this.discountPercent = discountPercent;
         this.checkoutDate = checkoutDate;
+        this.dueDate = checkoutDate.plusDays(dayCount);
 
         this.holidayJul = getIndependenceDay(checkoutDate.getYear());
         this.holidaySep = getLaborDay(checkoutDate.getYear());
@@ -61,11 +63,10 @@ public class CheckoutHandler {
         String toolBrand = tool.getBrand();
         String toolType = tool.getType();
         double toolCharge = tool.getCharge();
-        LocalDate dueDate = checkoutDate.plusDays(dayCount);
         int totalChargeableDays = totalChargeableDays(tool);
         double preDiscountCharge = totalChargeableDays * toolCharge;
-        double discountAmount = (discountPercent/100.0) * preDiscountCharge;
-        BigDecimal finalCharge = new BigDecimal(preDiscountCharge - discountAmount).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal discountAmount = new BigDecimal((discountPercent/100.0) * preDiscountCharge).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal finalCharge = new BigDecimal(preDiscountCharge - discountAmount.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 
         rentalAgreement.setToolCode(this.toolCode);
         rentalAgreement.setToolType(toolType);
@@ -102,16 +103,34 @@ public class CheckoutHandler {
                 // Don't charge on holidays
                 case Tool.typeLadder:
                     if (isHoliday(currentDay)) chargeableDays--;
+                    break;
 
                 // Don't charge on weekends
                 case Tool.typeChainsaw:
                     if (isWeekendDay(currentDay)) chargeableDays--;
+                    break;
 
                 // Don't charge on holidays or weekend
                 case Tool.typeJackhammer:
+                    if (isHoliday(currentDay) && isWeekendDay(currentDay))
+                    {
+                        // Independence day falls on Saturday, so recognize on Friday before
+                        if (currentDay.getDayOfWeek().equals(DayOfWeek.SATURDAY))
+                        {
+                            // Checking if checkout day was on or before Friday
+                            if (this.checkoutDate.isEqual(currentDay.minusDays(1)) || this.checkoutDate.isBefore(currentDay.minusDays(1))) chargeableDays--;
+                        }
+                        // Independence day falls on Sunday, so recognize on Monday after
+                        else if (currentDay.getDayOfWeek().equals(DayOfWeek.SUNDAY))
+                        {
+                            // Checking if checkout day is after Monday
+                            if (this.dueDate.isAfter(currentDay.plusDays(1))) chargeableDays--;
+                        }
+                    }
                     if (isHoliday(currentDay) || isWeekendDay(currentDay)) chargeableDays--;
+                    break;
             }
-            currentDay.plusDays(1);
+            currentDay = currentDay.plusDays(1);
         }
         return chargeableDays;
     }
@@ -135,7 +154,7 @@ public class CheckoutHandler {
      */
     private boolean isHoliday(LocalDate day)
     {
-        if (day == holidayJul || day == holidaySep) return true;
+        if (day.isEqual(holidayJul) || day.isEqual(holidaySep)) return true;
 
         return false;
     }
@@ -178,6 +197,6 @@ public class CheckoutHandler {
         System.out.println("Discount: " + rentalAgreement.getDiscountPercent() + "%");
         System.out.println("Discount Amount: " + NumberFormat.getCurrencyInstance().format(rentalAgreement.getDiscountAmount()));
         System.out.println("Final Charge: " + NumberFormat.getCurrencyInstance().format(rentalAgreement.getFinalCharge()));
-        System.out.println("|--------------------------------------|");
+        System.out.println("|--------------------------------------|\n");
     }
 }

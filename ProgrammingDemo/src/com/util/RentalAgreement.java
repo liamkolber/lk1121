@@ -15,7 +15,7 @@ public class RentalAgreement
     private int chargeDays;
     private double preDiscountCharge;
     private double discountPercent;
-    private double discountAmount;
+    private BigDecimal discountAmount;
     private BigDecimal finalCharge;
 
     public RentalAgreement() {}
@@ -120,12 +120,12 @@ public class RentalAgreement
         this.discountPercent = discountPercent;
     }
 
-    public double getDiscountAmount()
+    public BigDecimal getDiscountAmount()
     {
         return discountAmount;
     }
 
-    public void setDiscountAmount(double discountAmount)
+    public void setDiscountAmount(BigDecimal discountAmount)
     {
         this.discountAmount = discountAmount;
     }
